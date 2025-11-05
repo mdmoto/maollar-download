@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>下载 Maollar App - 喵乐商城</title>
+    <meta name="description" content="下载Maollar喵乐商城APP，享受更流畅的购物体验">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .version {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #666;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-btn .icon {
+            font-size: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .qr-code {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 15px;
+        }
+
+        .qr-code h3 {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .qr-code-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .qr-code-image img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .features {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h4 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-text p {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .info {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #999;
+            line-height: 1.8;
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .platform-badge .emoji {
+            margin-right: 6px;
+            font-size: 18px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .download-btn {
+                font-size: 16px;
+                padding: 15px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="https://your-new-maollar-oss.oss-cn-hongkong.aliyuncs.com/4c864e133c2944efad1f7282ac8a3b9e.png" alt="Maollar Logo">
+        </div>
+
+        <!-- 标题 -->
+        <h1>喵乐商城 Maollar</h1>
+        <p class="subtitle">全球精品 · 喵币购物 · 多语言支持</p>
+        
+        <!-- 版本信息 -->
+        <div class="version">Version 1.0.0</div>
+
+        <!-- 下载按钮 -->
+        <a href="https://your-new-maollar-oss.oss-cn-hongkong.aliyuncs.com/app/maollar-app.apk" class="download-btn" download>
+            <span class="icon">📱</span>
+            下载 Android APK
+        </a>
+
+        <!-- 平台支持 -->
+        <div style="margin: 20px 0;">
+            <span class="platform-badge">
+                <span class="emoji">🤖</span>
+                Android 6.0+
+            </span>
+            <span class="platform-badge">
+                <span class="emoji">🍎</span>
+                iOS (即将推出)
+            </span>
+        </div>
+
+        <!-- 二维码 -->
+        <div class="qr-code">
+            <h3>📱 扫码下载</h3>
+            <div class="qr-code-image">
+                <!-- 在线生成二维码 -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://download.maollar.com" alt="下载二维码">
+            </div>
+        </div>
+
+        <!-- 特色功能 -->
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon">🐱</div>
+                <div class="feature-text">
+                    <h4>喵币系统</h4>
+                    <p>购物赚喵币，价值持续增长</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-text">
+                    <h4>8种语言</h4>
+                    <p>支持中、英、日、韩等多语言</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">💳</div>
+                <div class="feature-text">
+                    <h4>多种支付</h4>
+                    <p>支付宝、Stripe、银行卡支付</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">🎁</div>
+                <div class="feature-text">
+                    <h4>优惠活动</h4>
+                    <p>签到、优惠券、分销奖励</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 安装说明 -->
+        <div class="info">
+            <strong>📝 安装说明：</strong><br>
+            1. 点击上方按钮下载APK文件<br>
+            2. 在手机上找到下载的文件<br>
+            3. 点击安装（需允许安装未知来源应用）<br>
+            4. 安装完成后打开App即可使用
+        </div>
+
+        <!-- 系统要求 -->
+        <div class="info" style="border-top: none; padding-top: 15px;">
+            <strong>💻 系统要求：</strong><br>
+            Android 6.0 或更高版本<br>
+            建议：Android 8.0+ 以获得最佳体验
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            © 2025 Maollar · 喵乐商城<br>
+            <a href="https://m.maollar.com" style="color: #999; text-decoration: none;">访问网页版</a>
+        </div>
+    </div>
+
+    <script>
+        // 自动检测系统
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isAndroid = userAgent.indexOf('android') > -1;
+        const isIOS = userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1;
+
+        // 如果是iOS，显示提示
+        if (isIOS) {
+            document.querySelector('.download-btn').innerHTML = `
+                <span class="icon">🍎</span>
+                iOS版本即将推出
+            `;
+            document.querySelector('.download-btn').style.background = '#ccc';
+            document.querySelector('.download-btn').style.cursor = 'not-allowed';
+            document.querySelector('.download-btn').onclick = function(e) {
+                e.preventDefault();
+                alert('iOS版本即将推出，敬请期待！\n或访问网页版：https://m.maollar.com');
+            };
+        }
+
+        // 统计下载次数（可选）
+        document.querySelector('.download-btn').addEventListener('click', function() {
+            if (isAndroid) {
+                console.log('下载开始');
+                // 可以调用API记录下载
+            }
+        });
+    </script>
+</body>
+</html>
+
