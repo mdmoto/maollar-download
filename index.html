@@ -231,10 +231,11 @@
         <div class="version">Version 0.9.2</div>
 
         <!-- 下载按钮 -->
-        <a href="https://pub-417ac49c84fe4e1f8570a65abf590010.r2.dev/maollar-app.apk" class="download-btn" download>
+        <a href="javascript:void(0)" id="downloadBtn" class="download-btn" onclick="smartDownload()">
             <span class="icon">📱</span>
-            下载 Android APK (46.3 MB)
+            <span id="downloadText">下载 Android APK (46.3 MB)</span>
         </a>
+        <div id="downloadStatus" style="margin-top: 10px; font-size: 14px; color: #666; text-align: center;"></div>
 
         <!-- 平台支持 -->
         <div style="margin: 20px 0;">
@@ -316,6 +317,154 @@
     </div>
 
     <script>
+        // ============================================
+        // 智能下载系统 - 自动检测地区和选择最佳下载源
+        // ============================================
+
+        // 下载源配置（按优先级排序）
+        const DOWNLOAD_SOURCES = [
+            {
+                name: 'Cloudflare R2（国际）',
+                url: 'https://pub-417ac49c84fe4e1f8570a65abf590010.r2.dev/maollar-app.apk',
+                region: 'international',
+                testUrl: 'https://pub-417ac49c84fe4e1f8570a65abf590010.r2.dev/',
+                priority: 1
+            },
+            {
+                name: 'EC2 新加坡（中国优化）',
+                url: 'http://54.255.179.211/maollar-app.apk',
+                region: 'china',
+                testUrl: 'http://54.255.179.211/',
+                priority: 2
+            }
+        ];
+
+        // 检测用户是否在中国
+        function isInChina() {
+            // 检测浏览器语言
+            const lang = navigator.language || navigator.userLanguage;
+            const isZH = lang.toLowerCase().includes('zh');
+            
+            // 检测时区（中国为 UTC+8）
+            const timezone = new Date().getTimezoneOffset();
+            const isChinaTimezone = (timezone === -480); // UTC+8
+            
+            // 检测语言环境
+            const isChinaLang = lang === 'zh-CN' || lang === 'zh';
+            
+            return isZH && (isChinaTimezone || isChinaLang);
+        }
+
+        // 测试下载源可用性
+        async function testDownloadSource(source) {
+            return new Promise((resolve) => {
+                const startTime = Date.now();
+                const timeout = 3000; // 3秒超时
+                
+                const img = new Image();
+                img.onload = () => {
+                    const latency = Date.now() - startTime;
+                    console.log(`✅ ${source.name} 可用，延迟: ${latency}ms`);
+                    resolve({ available: true, latency, source });
+                };
+                img.onerror = () => {
+                    console.log(`❌ ${source.name} 不可用`);
+                    resolve({ available: false, latency: 9999, source });
+                };
+                
+                // 超时处理
+                setTimeout(() => {
+                    console.log(`⏱️ ${source.name} 超时`);
+                    resolve({ available: false, latency: 9999, source });
+                }, timeout);
+                
+                // 尝试加载测试资源
+                img.src = source.testUrl + '?t=' + Date.now();
+            });
+        }
+
+        // 智能选择下载源
+        async function selectBestDownloadSource() {
+            const inChina = isInChina();
+            console.log('🌍 用户位置检测:', inChina ? '中国' : '国际');
+            
+            // 根据地区排序源
+            let sources = [...DOWNLOAD_SOURCES];
+            if (inChina) {
+                // 中国用户优先使用 EC2
+                sources.sort((a, b) => {
+                    if (a.region === 'china') return -1;
+                    if (b.region === 'china') return 1;
+                    return a.priority - b.priority;
+                });
+            }
+            
+            // 并发测试所有源
+            const results = await Promise.all(sources.map(testDownloadSource));
+            
+            // 选择可用且延迟最低的源
+            const available = results.filter(r => r.available);
+            if (available.length === 0) {
+                console.warn('⚠️ 所有下载源不可用');
+                return sources[0]; // 返回默认源
+            }
+            
+            // 按延迟排序，选择最快的
+            available.sort((a, b) => a.latency - b.latency);
+            const best = available[0].source;
+            
+            console.log(`✅ 最佳下载源: ${best.name} (延迟: ${available[0].latency}ms)`);
+            return best;
+        }
+
+        // 智能下载函数
+        async function smartDownload() {
+            const statusDiv = document.getElementById('downloadStatus');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const downloadText = document.getElementById('downloadText');
+            
+            // 显示加载状态
+            statusDiv.innerHTML = '🔍 正在选择最佳下载源...';
+            downloadBtn.style.opacity = '0.7';
+            downloadText.innerHTML = '正在准备下载...';
+            
+            try {
+                // 选择最佳源
+                const bestSource = await selectBestDownloadSource();
+                
+                // 更新状态
+                statusDiv.innerHTML = `📡 使用 ${bestSource.name}`;
+                downloadText.innerHTML = '开始下载...';
+                
+                // 延迟500ms让用户看到提示
+                setTimeout(() => {
+                    // 开始下载
+                    window.location.href = bestSource.url;
+                    
+                    // 恢复按钮状态
+                    setTimeout(() => {
+                        downloadBtn.style.opacity = '1';
+                        downloadText.innerHTML = '下载 Android APK (46.3 MB)';
+                        statusDiv.innerHTML = '✅ 下载已启动';
+                        
+                        // 3秒后清除提示
+                        setTimeout(() => {
+                            statusDiv.innerHTML = '';
+                        }, 3000);
+                    }, 1000);
+                    
+                    // 记录下载
+                    console.log('📥 下载开始:', bestSource.url);
+                }, 500);
+                
+            } catch (error) {
+                console.error('下载失败:', error);
+                statusDiv.innerHTML = '❌ 下载失败，请重试';
+                downloadBtn.style.opacity = '1';
+                downloadText.innerHTML = '重试下载';
+            }
+        }
+
         // 自动检测系统
         const userAgent = navigator.userAgent.toLowerCase();
         const isAndroid = userAgent.indexOf('android') > -1;
@@ -323,23 +472,32 @@
 
         // 如果是iOS，显示提示
         if (isIOS) {
-            document.querySelector('.download-btn').innerHTML = `
+            document.getElementById('downloadBtn').innerHTML = `
                 <span class="icon">🍎</span>
                 iOS版本即将推出
             `;
-            document.querySelector('.download-btn').style.background = '#ccc';
-            document.querySelector('.download-btn').style.cursor = 'not-allowed';
-            document.querySelector('.download-btn').onclick = function(e) {
+            document.getElementById('downloadBtn').style.background = '#ccc';
+            document.getElementById('downloadBtn').style.cursor = 'not-allowed';
+            document.getElementById('downloadBtn').onclick = function(e) {
                 e.preventDefault();
                 alert('iOS版本即将推出，敬请期待！\n或访问网页版：https://m.maollar.com');
             };
         }
 
-        // 统计下载次数（可选）
-        document.querySelector('.download-btn').addEventListener('click', function() {
-            if (isAndroid) {
-                console.log('下载开始');
-                // 可以调用API记录下载
+        // 页面加载时预检测下载源（提前准备）
+        window.addEventListener('DOMContentLoaded', async () => {
+            if (!isIOS) {
+                console.log('🚀 预检测下载源...');
+                const bestSource = await selectBestDownloadSource();
+                console.log(`✅ 预选源: ${bestSource.name}`);
+                
+                // 预先显示提示
+                const statusDiv = document.getElementById('downloadStatus');
+                const inChina = isInChina();
+                statusDiv.innerHTML = inChina ? 
+                    '🇨🇳 已为中国用户优化下载速度' : 
+                    '🌍 国际高速下载';
+                statusDiv.style.color = '#4caf50';
             }
         });
     </script>
