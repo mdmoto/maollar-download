@@ -5,28 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>App Store: Maollar - Supply Chain Protocol</title>
+    <title>Maollar - 喵乐商城</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="./logo.png">
-    <!-- SF Pro Display Font Mimic -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --app-blue: #007AFF;
-            --app-gray: #8E8E93;
-            --app-bg: #FFFFFF;
-            --app-text: #000000;
-            --border-color: #E5E5E5;
-            --card-gray: #F2F2F7;
+            --ios-blue: #007AFF;
+            --ios-bg: #FFFFFF;
+            --ios-text: #000000;
+            --ios-gray: #8E8E93;
+            --ios-light-gray: #F2F2F7;
+            --ios-border: #E5E5E5;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --app-bg: #000000;
-                --app-text: #FFFFFF;
-                --border-color: #1C1C1E;
-                --card-gray: #1C1C1E;
+                --ios-bg: #000000;
+                --ios-text: #FFFFFF;
+                --ios-border: #1C1C1E;
+                --ios-light-gray: #1C1C1E;
             }
         }
 
@@ -38,193 +36,189 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--app-bg);
-            color: var(--app-text);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            background-color: var(--ios-bg);
+            color: var(--ios-text);
             line-height: 1.4;
-            overflow-x: hidden;
+            padding-bottom: 50px;
         }
 
-        /* App Store Header */
-        header {
-            padding: 20px 20px 10px;
+        /* Top Navigation Header */
+        nav {
+            padding: 15px 20px;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .back-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--ios-light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ios-text);
+        }
+
+        /* App Main Info */
+        .app-main {
+            padding: 20px;
+            display: flex;
             gap: 20px;
-            border-bottom: 1px solid var(--border-color);
         }
 
         .app-icon {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 22%;
             background-color: #000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            flex-shrink: 0;
+            padding: 2px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            border: 1px solid rgba(128, 128, 128, 0.1);
+            flex-shrink: 0;
         }
 
         .app-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 18px;
         }
 
-        .app-header-info {
-            flex: 1;
+        .app-info {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 100px;
+            justify-content: center;
         }
 
-        .app-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 4px;
-        }
-
-        .app-subtitle {
-            font-size: 13px;
-            color: var(--app-gray);
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
-        .action-btns {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .get-btn {
-            background-color: var(--app-blue);
-            color: white;
-            padding: 6px 24px;
-            border-radius: 40px;
-            font-size: 15px;
+        .app-name {
+            font-size: 24px;
             font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .app-size {
+            font-size: 14px;
+            color: var(--ios-gray);
+            margin-bottom: 20px;
+        }
+
+        .install-btn {
+            background-color: var(--ios-blue);
+            color: white;
             text-decoration: none;
+            padding: 10px 40px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-block;
             transition: opacity 0.2s;
         }
 
-        .get-btn:active {
+        .install-btn:active {
             opacity: 0.7;
         }
 
-        .share-btn {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--app-blue);
+        /* Steps Section */
+        .steps-container {
+            padding: 20px;
+            font-size: 15px;
+            border-top: 1px solid var(--ios-border);
         }
 
-        /* Metadata Grid */
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        .step-text {
+            margin-bottom: 12px;
+            color: var(--ios-text);
+        }
+
+        .step-highlight {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+
+        /* Ratings / Info Icons Bar */
+        .info-bar {
+            display: flex;
             padding: 15px 20px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--ios-border);
             text-align: center;
         }
 
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            border-right: 1px solid var(--border-color);
+        .info-item {
+            flex: 1;
+            border-right: 1px solid var(--ios-border);
         }
 
-        .meta-item:last-child {
+        .info-item:last-child {
             border-right: none;
         }
 
-        .meta-label {
-            font-size: 10px;
-            color: var(--app-gray);
-            font-weight: 600;
-            text-transform: uppercase;
+        .info-label {
+            font-size: 11px;
+            color: var(--ios-gray);
+            margin-bottom: 4px;
         }
 
-        .meta-value {
-            font-size: 15px;
+        .info-value {
+            font-size: 16px;
             font-weight: 700;
-            color: var(--app-gray);
         }
 
-        .meta-value.highlight {
-            color: var(--app-text);
-        }
-
-        /* Screenshots */
-        .screenshots-container {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
+        /* What's New */
+        .section {
+            padding: 20px;
+            border-bottom: 1px solid var(--ios-border);
         }
 
         .section-title {
-            padding: 0 20px 15px;
-            font-size: 19px;
+            font-size: 20px;
             font-weight: 700;
-        }
-
-        .scroll-wrapper {
+            margin-bottom: 15px;
             display: flex;
-            overflow-x: auto;
-            gap: 12px;
-            padding: 0 20px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .scroll-wrapper::-webkit-scrollbar {
-            display: none;
+        .section-title span {
+            color: var(--ios-blue);
+            font-size: 14px;
+            font-weight: 500;
         }
 
-        .screenshot {
-            width: 240px;
-            aspect-ratio: 9/19;
-            background-color: var(--card-gray);
-            border-radius: 12px;
-            flex-shrink: 0;
-            scroll-snap-align: start;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
+        /* Rating Stars */
+        .rating-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .rating-num {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .rating-stars-container {
+            flex: 1;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--ios-light-gray);
+            border-radius: 2px;
+            margin: 6px 0;
             position: relative;
         }
 
-        .screenshot-placeholder {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            color: var(--app-gray);
-            font-size: 12px;
-            text-align: center;
-            padding: 20px;
+        .progress-fill {
+            height: 100%;
+            background: var(--ios-gray);
+            border-radius: 2px;
         }
 
-        /* Description */
-        .description {
-            padding: 20px;
-        }
-
-        .desc-text {
-            font-size: 14px;
-            line-height: 1.5;
-            color: var(--app-text);
-            margin-bottom: 15px;
-        }
-
-        /* iOS PWA Overlay */
+        /* iOS Overlay */
         #iosOverlay {
             position: fixed;
             top: 0;
@@ -242,12 +236,11 @@
         .ios-card {
             width: 100%;
             max-width: 500px;
-            background-color: var(--app-bg);
+            background-color: var(--ios-bg);
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            padding: 30px 20px 50px;
+            padding: 30px 20px 60px;
             animation: slideUp 0.4s cubic-bezier(0.3, 1, 0.3, 1);
-            position: relative;
         }
 
         @keyframes slideUp {
@@ -263,7 +256,6 @@
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             margin-bottom: 25px;
         }
 
@@ -272,314 +264,155 @@
             font-weight: 700;
         }
 
-        .close-btn {
-            font-size: 14px;
-            color: var(--app-blue);
-            font-weight: 600;
-        }
-
-        .step {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .step-icon {
-            width: 44px;
-            height: 44px;
-            background-color: var(--card-gray);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--app-blue);
-            flex-shrink: 0;
-        }
-
-        .step-info h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .step-info p {
-            font-size: 13px;
-            color: var(--app-gray);
-        }
-
-        .guide-indicator {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translate(-50%, 0);
-            }
-
-            40% {
-                transform: translate(-50%, -10px);
-            }
-
-            60% {
-                transform: translate(-50%, -5px);
-            }
-        }
-
-        .safari-share-hint {
-            color: var(--app-blue);
-            width: 24px;
-            height: 24px;
-        }
-
-        /* Android / Desktop Section */
-        #androidSection {
-            padding: 20px;
+        /* Android Specific */
+        .android-box {
             display: none;
-        }
-
-        .dl-card {
-            background-color: var(--card-gray);
-            border-radius: 16px;
+            margin: 20px;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .dl-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .dl-info h4 {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .dl-info p {
-            font-size: 12px;
-            color: var(--app-gray);
-        }
-
-        .dl-btn {
-            background-color: var(--app-blue);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
+            background: var(--ios-light-gray);
+            border-radius: 15px;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <!-- Main App Store Layout -->
-    <header>
+    <nav>
+        <div class="back-btn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </div>
+        <div style="font-weight: 600;">应用详情</div>
+        <div style="width: 30px;"></div>
+    </nav>
+
+    <div class="app-main">
         <div class="app-icon">
-            <img src="./logo.png" alt="Maollar Logo">
+            <img src="./logo.png" alt="Icon">
         </div>
-        <div class="app-header-info">
-            <div>
-                <h1 class="app-title">Maollar</h1>
-                <p class="app-subtitle">Autonomous Supply Chain Protocol</p>
-            </div>
-            <div class="action-btns">
-                <a href="#" class="get-btn" id="mainActionBtn">GET</a>
-                <div class="share-btn">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="meta-grid">
-        <div class="meta-item">
-            <span class="meta-label">4.9 RATINGS</span>
-            <span class="meta-value highlight">4.9 ★</span>
-        </div>
-        <div class="meta-item">
-            <span class="meta-label">AGE</span>
-            <span class="meta-value highlight">4+</span>
-        </div>
-        <div class="meta-item">
-            <span class="meta-label">CHART</span>
-            <span class="meta-value highlight">#1</span>
-        </div>
-        <div class="meta-item">
-            <span class="meta-label">DEVELOPER</span>
-            <span class="meta-value">Mao Fnd.</span>
+        <div class="app-info">
+            <div class="app-name">Maollar</div>
+            <div class="app-size">应用大小:1M</div>
+            <a href="#" class="install-btn" id="installBtn">立即安装</a>
         </div>
     </div>
 
-    <div class="screenshots-container">
-        <h2 class="section-title">What's New</h2>
-        <div class="scroll-wrapper">
-            <div class="screenshot">
-                <div class="screenshot-placeholder">
-                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1"
-                        opacity="0.3">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path
-                            d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                        </path>
-                    </svg>
-                    <span>Genesis Protocol Active. Real-world asset integration confirmed.</span>
+    <div class="steps-container" id="iosSteps">
+        <p class="step-text">1，步骤：如果没有自动跳转，请按照以下步骤安装：</p>
+        <p class="step-text" style="font-size: 13.5px;">
+            【设置-&gt; <span class="step-highlight">通用</span> -&gt; <span class="step-highlight">vpn与设备管理</span> -&gt;
+            <span class="step-highlight">Maollar</span> -&gt; <span class="step-highlight">安装</span> -&gt; 下一步 -&gt;
+            <span class="step-highlight">安装</span> -&gt; <span class="step-highlight">完成</span>】
+        </p>
+        <p class="step-text">2，若60s后没弹出安装APP，请【点击右上角刷新页面】</p>
+        <p style="color: var(--ios-gray); font-size: 13px; margin-top: 5px;">暂无</p>
+    </div>
+
+    <div class="info-bar">
+        <div class="info-item">
+            <div class="info-label">评分</div>
+            <div class="info-value">4.9 ★</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">年龄</div>
+            <div class="info-value">4+</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">排行</div>
+            <div class="info-value">#1</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">语言</div>
+            <div class="info-value">中文</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">评分及评论 <span>查看全部</span></div>
+        <div class="rating-box">
+            <div class="rating-num">4.9</div>
+            <div class="rating-stars-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 95%;"></div>
                 </div>
-            </div>
-            <div class="screenshot">
-                <div class="screenshot-placeholder">
-                    <span style="font-size: 40px; margin-bottom: 10px;">💎</span>
-                    <span>Direct Factory Access. 15% Hard Boundary enforced at code level.</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 5%;"></div>
                 </div>
-            </div>
-            <div class="screenshot">
-                <div class="screenshot-placeholder">
-                    <span style="font-size: 40px; margin-bottom: 10px;">⚡</span>
-                    <span>Native MCP Integration. Silicon-first procurement pipeline.</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 1%;"></div>
                 </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;"></div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;"></div>
+                </div>
+                <div style="text-align: right; font-size: 12px; color: var(--ios-gray);">9999个评分</div>
             </div>
         </div>
     </div>
 
-    <div class="description">
-        <h2 class="section-title">Description</h2>
-        <p class="desc-text">Maollar is not just a marketplace. It is a decentralized supply chain protocol built for
-            the AI era. When you buy, you are executing code.</p>
-        <p class="desc-text">Exercise your asset sovereignty through the $MAO protocol. Direct from source, Tokyo
-            quality, Costco logic.</p>
+    <div class="section">
+        <div class="section-title">新功能</div>
+        <div style="font-size: 14px; color: var(--ios-gray); margin-bottom: 5px;">版本 1.0</div>
+        <p style="font-size: 14px;">Maollar 自动化供应链协议上线。全球工厂直连，消费即代码执行。</p>
     </div>
 
-    <!-- Android / APK Section (Visible on Non-iOS) -->
-    <div id="androidSection">
-        <h2 class="section-title">Install for Android</h2>
-        <div class="dl-card">
-            <div class="dl-row">
-                <div class="dl-info">
-                    <h4>Maollar Android App</h4>
-                    <p>Version 0.9.2 • 46.3 MB</p>
-                </div>
-                <a href="https://pub-417ac49c84fe4e1f8570a65abf590010.r2.dev/maollar-app.apk"
-                    class="dl-btn">DOWNLOAD</a>
-            </div>
-            <p style="font-size: 11px; color: var(--app-gray);">Requires Android 6.0 and above. Enable "Unknown Sources"
-                to install.</p>
-        </div>
+    <div class="android-box" id="androidBox">
+        <h2 style="font-size: 18px; margin-bottom: 10px;">Android 下载</h2>
+        <a href="https://pub-417ac49c84fe4e1f8570a65abf590010.r2.dev/maollar-app.apk" class="install-btn"
+            style="background: #34c759;">下载 APK</a>
     </div>
 
-    <!-- iOS Guide Overlay -->
+    <!-- iOS Overlay -->
     <div id="iosOverlay">
         <div class="ios-card">
             <div class="card-header">
-                <h2>Install Maollar</h2>
-                <div class="close-btn" onclick="toggleOverlay(false)">Cancel</div>
+                <h2 id="cardTitle">正在下载描述文件...</h2>
+                <div style="color: var(--ios-blue); font-weight: 600;" onclick="closeOverlay()">关闭</div>
             </div>
-
-            <div class="step">
-                <div class="step-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" />
-                    </svg>
-                </div>
-                <div class="step-info">
-                    <h3>1. Tap the Share Button</h3>
-                    <p>Tap the share icon in the Safari navigation bar below.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
-                </div>
-                <div class="step-info">
-                    <h3>2. Add to Home Screen</h3>
-                    <p>Scroll down and select 'Add to Home Screen'.</p>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="step-icon">
-                    <span style="font-size: 20px; font-weight: 800;">Add</span>
-                </div>
-                <div class="step-info">
-                    <h3>3. Confirm Installation</h3>
-                    <p>Tap 'Add' in the top right corner to finish.</p>
-                </div>
-            </div>
-
-            <div class="guide-indicator">
-                <svg class="safari-share-hint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 5v14M5 12l7 7 7-7" />
-                </svg>
+            <div style="font-size: 15px; line-height: 1.6;">
+                <p style="margin-bottom: 15px;">1. 请在弹出的系统提示中点击<span style="font-weight: 700;">“允许”</span>。</p>
+                <p style="margin-bottom: 15px;">2. 下载完成后，前往<span style="font-weight: 700;">“设置” > “已下载描述文件”</span>进行安装。
+                </p>
+                <p>3. 安装完成后，Maollar 图标将出现在您的主屏幕上。</p>
             </div>
         </div>
     </div>
 
     <script>
         const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-        const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
-
-        const mainBtn = document.getElementById('mainActionBtn');
+        const installBtn = document.getElementById('installBtn');
         const overlay = document.getElementById('iosOverlay');
-        const androidSection = document.getElementById('androidSection');
+        const androidBox = document.getElementById('androidBox');
+        const iosSteps = document.getElementById('iosSteps');
 
-        function toggleOverlay(show) {
-            overlay.style.display = show ? 'flex' : 'none';
+        function closeOverlay() {
+            overlay.style.display = 'none';
         }
 
-        if (isStandalone) {
-            mainBtn.innerText = 'OPEN';
-            mainBtn.href = 'https://m.maollar.com';
-        } else if (isIOS) {
-            mainBtn.onclick = (e) => {
+        if (isIOS) {
+            installBtn.onclick = (e) => {
                 e.preventDefault();
-                // Redirect to the mobileconfig profile
-                window.location.href = './maollar.mobileconfig';
-
-                // Show the overlay as well to explain what's happening (Settings app)
-                toggleOverlay(true);
-
-                // Update overlay text to explain Profile installation
-                document.querySelector('.ios-card h2').innerText = 'Installing Profile...';
-                document.querySelector('.step:nth-of-type(1) .step-info h3').innerText = '1. Allow Download';
-                document.querySelector('.step:nth-of-type(1) .step-info p').innerText = 'Tap "Allow" when prompted to download the profile.';
-                document.querySelector('.step:nth-of-type(2) .step-info h3').innerText = '2. Open Settings';
-                document.querySelector('.step:nth-of-type(2) .step-info p').innerText = 'Go to iPhone Settings > Profile Downloaded.';
-                document.querySelector('.step:nth-of-type(3) .step-info h3').innerText = '3. Tap Install';
-                document.querySelector('.step:nth-of-type(3) .step-info p').innerText = 'Tap "Install" in the top right and follow prompts.';
+                overlay.style.display = 'flex';
+                // 延迟跳转，确保动画流畅
+                setTimeout(() => {
+                    window.location.href = './maollar.mobileconfig';
+                }, 500);
             };
         } else {
-            // Android or Desktop
-            androidSection.style.display = 'block';
-            mainBtn.innerText = 'GET';
-            mainBtn.href = '#androidSection';
+            // Android 逻辑
+            iosSteps.style.display = 'none';
+            androidBox.style.display = 'block';
+            installBtn.innerText = '立即下载';
+            installBtn.href = '#androidBox';
         }
 
-        // Close overlay on background click
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) toggleOverlay(false);
-        });
+        // 点击背景关闭
+        overlay.onclick = (e) => {
+            if (e.target === overlay) closeOverlay();
+        };
     </script>
 </body>
 
