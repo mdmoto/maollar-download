@@ -554,7 +554,20 @@
         } else if (isIOS) {
             mainBtn.onclick = (e) => {
                 e.preventDefault();
+                // Redirect to the mobileconfig profile
+                window.location.href = './maollar.mobileconfig';
+
+                // Show the overlay as well to explain what's happening (Settings app)
                 toggleOverlay(true);
+
+                // Update overlay text to explain Profile installation
+                document.querySelector('.ios-card h2').innerText = 'Installing Profile...';
+                document.querySelector('.step:nth-of-type(1) .step-info h3').innerText = '1. Allow Download';
+                document.querySelector('.step:nth-of-type(1) .step-info p').innerText = 'Tap "Allow" when prompted to download the profile.';
+                document.querySelector('.step:nth-of-type(2) .step-info h3').innerText = '2. Open Settings';
+                document.querySelector('.step:nth-of-type(2) .step-info p').innerText = 'Go to iPhone Settings > Profile Downloaded.';
+                document.querySelector('.step:nth-of-type(3) .step-info h3').innerText = '3. Tap Install';
+                document.querySelector('.step:nth-of-type(3) .step-info p').innerText = 'Tap "Install" in the top right and follow prompts.';
             };
         } else {
             // Android or Desktop
